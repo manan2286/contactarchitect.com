@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Architecture Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="index.html"><img src="images/logo.png" alt="Logo" height="50"/></a>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION: SLIDER -->
+  <section class="hero">
+    <div class="slider">
+      <img id="slider-image" src="images/image1.jpg" alt="Architecture Project" />
+      <div class="buttons">
+        <button onclick="prevImage()">Previous</button>
+        <button onclick="nextImage()">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 My Architecture. All rights reserved.</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const images = [
+      'images/image1.jpg',
+      'images/image2.jpg',
+      'images/image3.jpg'
+    ];
+
+    let currentIndex = 0;
+
+   function showImage(index) {
+    const img = document.getElementById('slider-image');
+
+    // Remove the class to reset animation
+    img.classList.remove('fade-in');
+
+    // Change image
+    img.src = images[index];
+
+    // Force reflow to restart animation
+    void img.offsetWidth;
+
+    // Re-add class to trigger fade
+    img.classList.add('fade-in');
+}
+
+
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Show first image
+    showImage(currentIndex);
+
+    // Auto-slide every 4 seconds
+    setInterval(() => {
+      nextImage();
+    }, 4000);
+  </script>
+
+</body>
+</html>
